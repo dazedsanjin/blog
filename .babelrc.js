@@ -1,7 +1,7 @@
 /*
  * @Author: shaoqing
  * @Date: 2021-06-25 16:47:09
- * @LastEditTime: 2021-06-25 17:57:34
+ * @LastEditTime: 2021-07-05 11:31:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-blog\.babelrc.js
@@ -25,5 +25,10 @@ module.exports = {
         development: process.env.NODE_ENV === 'development'
       }
     ]
+  ],
+  plugins: [
+    ['@babel/plugin-proposal-decorators', { legacy: true }],
+    ['@babel/plugin-proposal-class-properties', { loose: true }],
+    '@babel/plugin-syntax-dynamic-import'
   ]
 }

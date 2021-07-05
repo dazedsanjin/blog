@@ -1,7 +1,7 @@
 /*
  * @Author: shaoqing
  * @Date: 2021-06-25 13:16:26
- * @LastEditTime: 2021-06-25 14:11:27
+ * @LastEditTime: 2021-07-05 17:41:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-blog\scripts\start.js
@@ -40,11 +40,12 @@ const logger = {
 }
 
 const compiler = Webpack(WebpackConfig)
-const devServerOptions = Object.assign({}, WebpackConfig.devServer, {
+const devServerOptions = {
+  ...WebpackConfig.devServer,
   open: true,
   compress: true,
   stats: 'minimal'
-})
+}
 
 const server = new WebpackDevServer(compiler, devServerOptions)
 server.listen(config.port, config.host, async (err) => {
