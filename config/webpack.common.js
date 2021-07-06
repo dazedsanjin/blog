@@ -1,7 +1,7 @@
 /*
  * @Author: shaoqing
  * @Date: 2021-06-24 09:39:46
- * @LastEditTime: 2021-07-05 17:50:38
+ * @LastEditTime: 2021-07-06 17:41:21
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-blog\config\webpack.common.js
@@ -10,6 +10,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 const webpack = require('webpack')
 const paths = require('./paths')
 
@@ -92,6 +93,12 @@ module.exports = function (options) {
       ]
     },
     plugins: [
+      new CompressionPlugin({
+        // gzip压缩配置
+        test: /\.js$|\.html$|\.css/, // 匹配文件名
+        threshold: 10240, // 对超过10kb的数据进行压缩
+        deleteOriginalAssets: false // 是否删除原文件
+      }),
       new HtmlWebpackPlugin({
         inject: true, // 依赖scriptLoading方式向html注入静态资源（默认：延迟加载）
         template: paths.appHtml
@@ -129,7 +136,10 @@ module.exports = function (options) {
             }
           }
         })
-      ]
+      ],
+      splitChunks: {
+        chunks: 'all'
+      }
     },
     resolve: {
       modules: [paths.appNodeModules],
