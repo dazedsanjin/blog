@@ -9,13 +9,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './style.scss'
-import npm from '../public/clear-all.png'
 
 ReactDOM.render(
   <React.StrictMode>
     <div className="App">
       <span>{process.env.NODE_ENV}s</span>
-      <img src={npm} />
     </div>
   </React.StrictMode>,
   document.getElementById('root')

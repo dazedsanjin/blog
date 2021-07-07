@@ -16,9 +16,8 @@ module.exports = require('./webpack.common')({
     new CleanWebpackPlugin(),
     new WebpackBarPlugin(), // 打包进度条
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash:8].css',
-      chunkFilename: 'css/[name].[contenthash:8].chunk.css',
-      ignoreOrder: true // 忽略有关顺序冲突的警告
+      filename: 'static/css/[name].[contenthash:8].css',
+      chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
     })
   ],
   stats: 'errors-only' // 控制台仅显示错误信息

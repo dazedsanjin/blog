@@ -11,6 +11,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const webpack = require('webpack')
 const paths = require('./paths')
 
@@ -20,17 +21,19 @@ module.exports = function (options) {
   return {
     mode: options.mode,
     bail: isEnvProduction, // 生产环境下，出现错误，停止继续打包
-    devtool: isEnvProduction ? false : 'cheap-module-source-map',
+    devtool: isEnvProduction ? false : 'cheap-module-source-map', // sourceMap 类型
     cache: isEnvDevelopment, // 开发环境下，缓存生成的webpack模块，改善构建速度
     entry: paths.appIndexJs,
     output: {
       path: isEnvProduction ? paths.appBuild : undefined,
-      publicPath: './'
+      filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : isEnvDevelopment && 'static/js/[name].js',
+      chunkFilename: isEnvProduction ? 'static/js/[name].[contenthash:8].chunk.js' : isEnvDevelopment && 'static/js/[name].chunk.js',
+      publicPath: './' // public 引入link script 路径 ./static/js
     },
     module: {
       rules: [
         {
-          oneOf: [
+          oneOf: [ // 匹配 停止遍历
             {
               test: /\.(js|jsx)$/,
               include: paths.appSrc,
@@ -38,7 +41,7 @@ module.exports = function (options) {
                 {
                   loader: 'babel-loader',
                   options: {
-                    cacheDirectory: true
+                    cacheDirectory: true // 缓存loader执行结果（node_modules/.cache）
                   }
                 }
               ]
@@ -47,11 +50,11 @@ module.exports = function (options) {
               test: /\.css$/,
               exclude: /\.module\.css$/,
               use: [
-                isEnvProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                isEnvProduction ? MiniCssExtractPlugin.loader : 'style-loader', // 将 CSS 提取到单独的文件
                 {
                   loader: 'css-loader',
                   options: {
-                    importLoaders: 2, // 0 => 无 loader(默认); 1 => postcss-loader; 2 => postcss-loader, sass-loader
+                    importLoaders: 2, // 2 => postcss-loader, sass-loader （允许css-loader 前有多少loader应用）
                     sourceMap: true
                   }
                 },
@@ -67,7 +70,7 @@ module.exports = function (options) {
                 {
                   loader: 'css-loader',
                   options: {
-                    importLoaders: 2, // 0 => 无 loader(默认); 1 => postcss-loader; 2 => postcss-loader, sass-loader
+                    importLoaders: 2,
                     sourceMap: true
                   }
                 },
@@ -77,22 +80,29 @@ module.exports = function (options) {
             },
             {
               test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-              type: 'asset',
+              type: 'asset', // 替代webpack4 url-loader
+              generator: {
+                filename: 'static/images/[hash][ext]'
+              },
               parser: {
                 dataUrlCondition: {
-                  maxSize: 1024 * 4
+                  maxSize: 1024 * 4 // 小于4KB 均已base64 格式存储
                 }
               }
             },
             {
               test: /\.(eot|svg|ttf|woff|woff2?)$/,
-              type: 'asset/resource'
+              type: 'asset/resource', // 替代webpack4 file-loader
+              generator: {
+                filename: 'static/fonts/[hash][ext]'
+              },
             }
           ]
         }
       ]
     },
     plugins: [
+      new BundleAnalyzerPlugin(), // 包体积分析
       new CompressionPlugin({
         // gzip压缩配置
         test: /\.js$|\.html$|\.css/, // 匹配文件名
@@ -104,18 +114,18 @@ module.exports = function (options) {
         template: paths.appHtml
       }),
       new webpack.DefinePlugin({
-        NODE_ENV: isEnvProduction && JSON.stringify('production') // 设置全局
+        NODE_ENV: isEnvProduction && JSON.stringify('production') // 设置全局访问变量
       }),
       ...options.plugins
     ],
     optimization: {
       minimize: isEnvProduction,
       minimizer: [
-        new CssMinimizerPlugin({
-          parallel: true // 开启多线程压缩(css)
+        new CssMinimizerPlugin({ // 压缩css
+          parallel: true
         }),
-        new TerserPlugin({
-          parallel: true, // 开启多线程压缩(JS)
+        new TerserPlugin({ // 压缩js
+          parallel: true,
           terserOptions: {
             parse: {
               ecma: 8
@@ -143,13 +153,13 @@ module.exports = function (options) {
     },
     resolve: {
       modules: [paths.appNodeModules],
-      extensions: ['.js', '.jsx'],
+      extensions: ['.js', '.jsx', '.json'], // 相同文件名 按这个后缀名顺序解析
       alias: {
         '@/src': paths.appSrc,
         '@/public': paths.appPublic
       }
     },
     devServer: {},
-    stats: options.stats // 编译/打包 警告、错误输出
+    stats: options.stats // 控制台编译/打包 警告、错误输出
   }
 }

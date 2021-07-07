@@ -42,9 +42,11 @@ module.exports = {
     'react/jsx-indent-props': ['error', 4],
     'no-console': 0, // 不禁用console
     'react/jsx-props-no-spreading': 0,
+    'prefer-destructuring': 0,
     'linebreak-style': 0,
     'comma-dangle': 0,
     'max-len': 0,
+    'func-names': 0,
     'import/no-unresolved': [
       2,
       {
