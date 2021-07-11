@@ -1,0 +1,28 @@
+.animation {
+  position: relative;
+  background: #000;
+  height: 100%;
+}
+.animation .line {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-100px, -100px);
+}
+.animation .dj {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-60px, -60px);
+}
+.curve {
+  stroke-dasharray: 3367;
+  stroke-dashoffset: 3367;
+  stroke-linecap: null;
+  stroke-linejoin: null;
+  stroke-dasharray: null;
+  stroke-width: 16;
+}
+.eraser {
+  opacity: 0;
+}

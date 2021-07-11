@@ -39,12 +39,13 @@ module.exports = {
     'arrow-body-style': [2, 'as-needed'], // 箭头函数
     'class-methods-use-this': 0, // 强制类方法使用 this
     // Indent props with 4 spaces
-    'react/jsx-indent-props': ['error', 4],
+    'react/jsx-indent-props': 0,
     'no-console': 0, // 不禁用console
     'react/jsx-props-no-spreading': 0,
     'prefer-destructuring': 0,
     'linebreak-style': 0,
     'comma-dangle': 0,
+    'object-curly-newline': 0,
     'max-len': 0,
     'func-names': 0,
     'import/no-unresolved': [

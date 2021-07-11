@@ -8,11 +8,13 @@
  */
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const WebpackBarPlugin = require('webpackbar')
 
 module.exports = require('./webpack.common')({
   mode: 'production',
   plugins: [
+    new BundleAnalyzerPlugin(), // 包体积分析
     new CleanWebpackPlugin(),
     new WebpackBarPlugin(), // 打包进度条
     new MiniCssExtractPlugin({

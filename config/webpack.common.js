@@ -11,7 +11,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const webpack = require('webpack')
 const paths = require('./paths')
 
@@ -26,14 +25,19 @@ module.exports = function (options) {
     entry: paths.appIndexJs,
     output: {
       path: isEnvProduction ? paths.appBuild : undefined,
-      filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : isEnvDevelopment && 'static/js/[name].js',
-      chunkFilename: isEnvProduction ? 'static/js/[name].[contenthash:8].chunk.js' : isEnvDevelopment && 'static/js/[name].chunk.js',
+      filename: isEnvProduction
+        ? 'static/js/[name].[contenthash:8].js'
+        : isEnvDevelopment && 'static/js/[name].js',
+      chunkFilename: isEnvProduction
+        ? 'static/js/[name].[contenthash:8].chunk.js'
+        : isEnvDevelopment && 'static/js/[name].chunk.js',
       publicPath: './' // public 引入link script 路径 ./static/js
     },
     module: {
       rules: [
         {
-          oneOf: [ // 匹配 停止遍历
+          oneOf: [
+            // 匹配 停止遍历
             {
               test: /\.(js|jsx)$/,
               include: paths.appSrc,
@@ -95,14 +99,13 @@ module.exports = function (options) {
               type: 'asset/resource', // 替代webpack4 file-loader
               generator: {
                 filename: 'static/fonts/[hash][ext]'
-              },
+              }
             }
           ]
         }
       ]
     },
     plugins: [
-      new BundleAnalyzerPlugin(), // 包体积分析
       new CompressionPlugin({
         // gzip压缩配置
         test: /\.js$|\.html$|\.css/, // 匹配文件名
@@ -121,10 +124,12 @@ module.exports = function (options) {
     optimization: {
       minimize: isEnvProduction,
       minimizer: [
-        new CssMinimizerPlugin({ // 压缩css
+        new CssMinimizerPlugin({
+          // 压缩css
           parallel: true
         }),
-        new TerserPlugin({ // 压缩js
+        new TerserPlugin({
+          // 压缩js
           parallel: true,
           terserOptions: {
             parse: {

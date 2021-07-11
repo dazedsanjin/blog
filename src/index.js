@@ -8,12 +8,19 @@
  */
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
+import Animation from './pages/animation/animation'
 import './style.scss'
 
 ReactDOM.render(
   <React.StrictMode>
-    <div className="App">
-      <span>{process.env.NODE_ENV}s</span>
+    <div className="app">
+      <HashRouter>
+        <Switch>
+          <Route path="/loading" component={Animation}></Route>
+          <Redirect to="/loading"></Redirect>
+        </Switch>
+      </HashRouter>
     </div>
   </React.StrictMode>,
   document.getElementById('root')

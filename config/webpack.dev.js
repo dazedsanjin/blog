@@ -12,7 +12,7 @@ module.exports = require('./webpack.common')({
   mode: 'development',
   plugins: [
     new ESLintPlugin({
-      fix: true,
+      fix: false,
       extensions: ['js', 'jsx'],
       exclude: ['/node_modules/', 'build'],
       cache: true
