@@ -1,7 +1,7 @@
 /*
  * @Author: shaoqing
  * @Date: 2021-06-24 09:39:46
- * @LastEditTime: 2021-07-06 17:41:21
+ * @LastEditTime: 2021-07-12 23:07:06
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-blog\config\webpack.common.js
@@ -114,7 +114,8 @@ module.exports = function (options) {
       }),
       new HtmlWebpackPlugin({
         inject: true, // 依赖scriptLoading方式向html注入静态资源（默认：延迟加载）
-        template: paths.appHtml
+        template: paths.appHtml,
+        favicon: './public/favicon.png'
       }),
       new webpack.DefinePlugin({
         NODE_ENV: isEnvProduction && JSON.stringify('production') // 设置全局访问变量
