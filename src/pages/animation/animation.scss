@@ -9,11 +9,13 @@
   top: 50%;
   transform: translate(-100px, -100px);
 }
-.animation .dj {
+.animation .main {
+  display: flex;
+  align-items: flex-end;
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-60px, -60px);
+  transform: translate(-50%, -50%);
 }
 .curve {
   stroke-dasharray: 3367;
@@ -25,4 +27,20 @@
 }
 .eraser {
   opacity: 0;
+}
+.main .goto {
+  display: flex;
+  flex-direction: column-reverse;
+  padding-left: 30px;
+}
+.goto .arrow {
+  cursor: pointer;
+}
+.goto .arrow:hover {
+  transform: translate(8px, 0);
+  transition: transform 0.3s ease;
+}
+.goto .more text {
+  font-weight: bold;
+  font-family: '优设好身体';
 }
