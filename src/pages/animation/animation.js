@@ -1,17 +1,19 @@
 /*
- * @Author: your name
+ * @Author: shaoqing
  * @Date: 2021-07-10 15:46:52
- * @LastEditTime: 2021-07-12 22:50:27
+ * @LastEditTime: 2021-07-13 21:55:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-blog\src\pages\animation\animation.js
  */
 import React, { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
 import Gsap from 'gsap'
 import './animation.scss'
 
 function Animation() {
   const [tl] = useState(Gsap.timeline())
+  const history = useHistory()
 
   /**
    * @description: 初始化TimeLine
@@ -58,6 +60,16 @@ function Animation() {
   useEffect(() => {
     initTimeline()
   })
+
+  /**
+   * @description: 跳转至主页
+   * @param {*}
+   * @return {*}
+   */
+  function gotoHome() {
+    history.push('/home')
+  }
+
   return (
     <div className="animation">
       <svg
@@ -116,7 +128,7 @@ function Animation() {
             />
           </g>
         </svg>
-        <div className="goto">
+        <div className="goto" onClick={gotoHome}>
           <svg
             className="arrow"
             xmlns="http://www.w3.org/2000/svg"
