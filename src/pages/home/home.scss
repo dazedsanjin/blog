@@ -1,0 +1,55 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px 0;
+}
+.header .links {
+  list-style: none;
+  font-size: 20px;
+}
+.links li {
+  cursor: pointer;
+}
+li a {
+  font-family: 'Manrope';
+  text-decoration: none;
+}
+li a:hover {
+  border-bottom: 2px solid #000000;
+}
+li a:link {
+  color: #000;
+}
+li a:visited {
+  color: #000;
+}
+li a:active {
+  color: #000;
+}
+.header .switch {
+  cursor: pointer;
+}
+@media screen and (min-width: 1440px) {
+  .header {
+    width: 1170px;
+  }
+}
+.main {
+  width: 1280px;
+  margin: 0 auto;
+  padding-top: 20px;
+}
+.main .articles {
+  display: flex;
+  flex-wrap: wrap;
+}
+.articles .article {
+  margin: 0 10px 20px;
+  width: 300px;
+  height: 360px;
+  border-radius: 6px;
+  background: #fff;
+}

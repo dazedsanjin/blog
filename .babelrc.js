@@ -1,7 +1,7 @@
 /*
  * @Author: shaoqing
  * @Date: 2021-06-25 16:47:09
- * @LastEditTime: 2021-07-06 16:56:01
+ * @LastEditTime: 2021-07-14 18:33:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-blog\.babelrc.js
@@ -30,6 +30,7 @@ module.exports = {
     ['@babel/plugin-proposal-decorators', { legacy: true }], // 把类和对象的装饰器编译成 ES5 代码
     ['@babel/plugin-proposal-class-properties', { loose: true }], // 转换静态类属性以及使用属性初始值化语法声明的属性
     ['@babel/plugin-proposal-private-methods', { loose: true }], // 转换私有方法
-    '@babel/plugin-syntax-dynamic-import' // 支持动态加载 import
+    '@babel/plugin-syntax-dynamic-import', // 支持动态加载 import
+    ['import', { libraryName: 'antd', style: 'css' }]
   ]
 }
