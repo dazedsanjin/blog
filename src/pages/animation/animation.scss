@@ -18,8 +18,8 @@
   transform: translate(-50%, -50%);
 }
 .curve {
-  stroke-dasharray: 3367;
-  stroke-dashoffset: 3367;
+  stroke-dasharray: 3367 3367;
+  stroke-dashoffset: 10101;
   stroke-linecap: null;
   stroke-linejoin: null;
   stroke-dasharray: null;
