@@ -1,7 +1,7 @@
 /*
  * @Author: shaoqing
  * @Date: 2021-06-24 11:03:22
- * @LastEditTime: 2021-07-06 16:51:19
+ * @LastEditTime: 2021-07-13 21:44:55
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-blog\src\index.js
@@ -10,6 +10,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import Animation from './pages/animation/animation'
+import Home from './pages/home/home'
 import './style.scss'
 
 ReactDOM.render(
@@ -18,6 +19,7 @@ ReactDOM.render(
       <HashRouter>
         <Switch>
           <Route path="/loading" component={Animation}></Route>
+          <Route path="/home" component={Home}></Route>
           <Redirect to="/loading"></Redirect>
         </Switch>
       </HashRouter>
