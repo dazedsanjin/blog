@@ -1,7 +1,7 @@
 /*
  * @Author: shaoqing
  * @Date: 2021-06-25 17:35:04
- * @LastEditTime: 2021-06-25 18:12:49
+ * @LastEditTime: 2022-01-06 13:48:11
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-blog\.eslintrc.js
@@ -48,6 +48,7 @@ module.exports = {
     'object-curly-newline': 0,
     'max-len': 0,
     'func-names': 0,
+    'no-shadow': 0,
     'import/no-unresolved': [
       2,
       {
