@@ -1,7 +1,7 @@
 /*
  * @Author: shaoqing
  * @Date: 2021-07-10 15:46:52
- * @LastEditTime: 2021-07-14 09:06:09
+ * @LastEditTime: 2022-01-06 11:04:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-blog\src\pages\animation\animation.js
@@ -14,7 +14,6 @@ import './animation.scss'
 function Animation() {
   const [tl] = useState(Gsap.timeline())
   const history = useHistory()
-
   /**
    * @description: 初始化TimeLine
    * @param {*}

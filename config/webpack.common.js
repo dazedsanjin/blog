@@ -1,7 +1,7 @@
 /*
  * @Author: shaoqing
  * @Date: 2021-06-24 09:39:46
- * @LastEditTime: 2021-07-12 23:07:06
+ * @LastEditTime: 2022-01-06 13:22:34
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-blog\config\webpack.common.js
@@ -25,12 +25,8 @@ module.exports = function (options) {
     entry: paths.appIndexJs,
     output: {
       path: isEnvProduction ? paths.appBuild : undefined,
-      filename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].js'
-        : isEnvDevelopment && 'static/js/[name].js',
-      chunkFilename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].chunk.js'
-        : isEnvDevelopment && 'static/js/[name].chunk.js',
+      filename: isEnvProduction ? 'static/js/[name].[contenthash:8].js' : isEnvDevelopment && 'static/js/[name].js',
+      chunkFilename: isEnvProduction ? 'static/js/[name].[contenthash:8].chunk.js' : isEnvDevelopment && 'static/js/[name].chunk.js',
       publicPath: './' // public 引入link script 路径 ./static/js
     },
     module: {
